@@ -50,7 +50,7 @@ class MovieCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .left
         
-        label.textColor = UIColor(red: 99, green: 115, blue: 148, alpha: 1)
+        label.textColor = .gray
         
         return label
     }()
@@ -61,6 +61,15 @@ class MovieCell: UICollectionViewCell {
         button.tintColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         
+        return button
+    }()
+    
+    private let imdbButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(red: 252/255.0, green: 119/255.0, blue: 41/255.0, alpha: 1)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 8
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         return button
     }()
     
@@ -88,6 +97,7 @@ class MovieCell: UICollectionViewCell {
     private func setupMovieImageView() {
         addSubview(movieImageViewCont)
         addSubview(heartButton)
+        addSubview(imdbButton)
         
         NSLayoutConstraint.activate([
             movieImageViewCont.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -97,7 +107,12 @@ class MovieCell: UICollectionViewCell {
             heartButton.topAnchor.constraint(equalTo: movieImageViewCont.topAnchor, constant: 8),
             heartButton.leadingAnchor.constraint(equalTo: movieImageViewCont.leadingAnchor, constant: 8),
             heartButton.widthAnchor.constraint(equalToConstant: 32),
-            heartButton.heightAnchor.constraint(equalToConstant: 32)
+            heartButton.heightAnchor.constraint(equalToConstant: 32),
+            
+            imdbButton.topAnchor.constraint(equalTo: movieImageViewCont.topAnchor, constant: 8),
+            imdbButton.trailingAnchor.constraint(equalTo: movieImageViewCont.trailingAnchor, constant: -8),
+            imdbButton.widthAnchor.constraint(equalToConstant: 33),
+            imdbButton.heightAnchor.constraint(equalToConstant: 23)
         ])
         
         heartButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
@@ -135,5 +150,6 @@ class MovieCell: UICollectionViewCell {
         movieImageViewCont.image = model.image
         movieTitleLabel.text = model.title
         movieGenreLabel.text = model.genre
+        imdbButton.setTitle(String(model.rating), for: .normal)
     }
 }
