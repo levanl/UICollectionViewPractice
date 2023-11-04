@@ -99,7 +99,8 @@ class HomeViewController: UIViewController {
         view.addSubview(moviesCollectionView)
         
         if let layout = moviesCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 164, height: 278)
+//            layout.itemSize = CGSize(width: 164, height: 278)
+            layout.itemSize = CGSize(width: (view.frame.width / 2) - 24, height: 278)
         }
         
         NSLayoutConstraint.activate([
