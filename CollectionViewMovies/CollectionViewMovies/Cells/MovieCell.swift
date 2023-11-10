@@ -69,6 +69,7 @@ class MovieCell: UICollectionViewCell {
         button.backgroundColor = UIColor(red: 252/255.0, green: 119/255.0, blue: 41/255.0, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
+        button.setTitle("8.6", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         return button
     }()
@@ -146,10 +147,15 @@ class MovieCell: UICollectionViewCell {
     
     // MARK: - Configure Method
     
-    func configure(with model: Movie) {
-        movieImageViewCont.image = model.image
-        movieTitleLabel.text = model.title
-        movieGenreLabel.text = model.genre
-        imdbButton.setTitle(String(model.rating), for: .normal)
+    func configure(with model: MovieFetchedModel.Movie) {
+        movieTitleLabel.text = model.Title
+        MovieService.loadImage(from: model.Poster) { [weak self] image in
+            
+            DispatchQueue.main.async {
+                self?.movieImageViewCont.image = image
+            }
+        }
     }
+    
+    
 }
