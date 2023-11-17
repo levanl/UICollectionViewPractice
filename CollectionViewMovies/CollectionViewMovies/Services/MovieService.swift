@@ -18,8 +18,6 @@ class MovieService {
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { throw MovieError.invalidResponse }
         
-        //        print(String(data: data, encoding: .utf8) ?? "Invalid data")
-        
         do {
             let decoder = JSONDecoder()
             return try decoder.decode(MovieFetchedModel.self, from: data)

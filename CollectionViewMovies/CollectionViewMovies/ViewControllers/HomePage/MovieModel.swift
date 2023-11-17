@@ -8,16 +8,16 @@
 
 import UIKit
 
+//MARK: 🏃‍♂️ Model
 
 struct MovieFetchedModel: Codable {
     
     struct Movie: Codable {
         let Title: String
         let Poster: String
-        
     }
     
-    let totalResults: String
-    let Response: String
-    let Search: [Movie]
+    var totalResults: String = ""
+    var Response: String = ""
+    var Search: [Movie] = []
 }
